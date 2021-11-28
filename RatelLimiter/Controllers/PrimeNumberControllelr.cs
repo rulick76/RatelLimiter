@@ -3,8 +3,6 @@ using Microsoft.Extensions.Logging;
 using RatelLimiter.Helper;
 using RatelLimiter.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using static RatelLimiter.Models.Entities;
 

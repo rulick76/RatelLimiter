@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Timers;
 namespace RatelLimiter.Services
@@ -65,10 +62,11 @@ namespace RatelLimiter.Services
                         {
                             Data.cache[token].stopwatch.Start();
                         }
-                        else if ((Data.cache[token].stopwatch.ElapsedMilliseconds / 1000) >= 300)
+                        else if ((Data.cache[token].stopwatch.ElapsedMilliseconds / 1000) >= 3600)
                         {
                             Data.cache[token].isBlocked = false;
                             Data.cache[token].stopwatch.Stop();
+                            Data.cache[token].stopwatch.Reset();
                         }
 
                         return false;
@@ -99,7 +97,7 @@ namespace RatelLimiter.Services
 
             lock(objLock2)
             {
-                return ((5*60) - (Data.cache[token].stopwatch.ElapsedMilliseconds / 1000))/60;
+                return (((60*60) - (Data.cache[token].stopwatch.ElapsedMilliseconds / 1000))/60);
             }
         }
     }    
